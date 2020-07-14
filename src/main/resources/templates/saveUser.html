@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>User demo app</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Application demo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link"  th:href="@{/getAllUser}" >Listes des utilisateurs </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/addNewUser}" >Nouveau utilisateur</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form th:action="@{/saveUser/{id}(id=${user.id})}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label th:for="name" >Nom client </label>
+                <input class="form-control" type="text" th:field="*{name}" id="name" >
+                <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" ></small>
+            </div>
+
+            <div class="form-group">
+                <label th:for="matrimonial" >Situation matrimoniale</label>
+                <select th:field="*{matrimonial}" class="form-control">
+                    <option th:value="'Célibataire'" th:text="Célibataire" selected></option>
+                    <option th:value="'Veuf'" th:text="Veuf"></option>
+                    <option th:value="'Marié'" th:text="Marié"></option>
+                </select>
+                <small th:if="${#fields.hasErrors('matrimonial')}" th:errors="*{matrimonial}"></small>
+            </div>
+
+            <div class="form-group">
+                <label th:for="state" >Activé?</label>
+                <input class="form-check-label" type="checkbox" th:field="*{state}" id="state" >
+            </div>
+
+            <div class="form-group">
+                <label th:for="state" >Sexe : </label>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="option1" name="option1" class="custom-control-input" value="M" th:field="*{gender}">
+                    <label class="custom-control-label" for="option1">Home</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="option2" name="option2" class="custom-control-input" value="F" th:field="*{gender}">
+                    <label class="custom-control-label" for="option2">Femme</label>
+                </div>
+            </div>
+
+            <button type="submit" th:name="action" th:value="Submit" class="btn btn-primary">Save</button>
+
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
